@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quick Health Clinic Stroke Prediction</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-outline">
+        <h3 class="mx-auto" style="display: inline-flex;">
+            <img class="me-3" src="static/images/clinic_logo.svg" alt="Logo for Quick Health Clinic" height="40px" width="40px"></imgsrc>
+            <div class="bolder-text">Quick Health Clinic</div>
+        </h3>
+    </nav>
+    <section class="container">
+        <div class="mb-3"></div>
+
+        <!-- START OR ABOUT -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mx-auto shadow-outline">
+                    <div class="card-body">
+                        <h1 class="text-center bolder-text">About Quick Health Clinic & This Tool</h1>
+                        <h3 class="text-center mb-2 text-muted"></h3>
+                        <hr/>
+                        <p class="card-text">This is a tool developed for Quick Health Clinic Co. to accurately predict the probability that a patient could experience a stroke in the future. This tool uses a large publicly sourced data set and performs data analysis to output
+                            a result to the user. The data analysis technique used for this tool is logistic regression. An interpretation of the probability is also provided to the user. This interpretation allows for a quick and easy understanding of
+                            the results.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF ABOUT -->
+
+        <!-- START OF FORM -->
+        <hr class="mb-3 mt-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card mx-auto shadow-outline">
+                    <div class="card-body">
+                        <h1 class="text-center bolder-text">Patient Information Form</h1>
+                        <h3 class="text-center mb-2 text-muted">Fill in Form Below</h3>
+                        <hr/>
+
+                        <!-- GENDER -->
+                        <p class="card-text bold-text">Gender</p>
+                        <div class="mb-3">
+                            <select id="patientGender" class="form-select" aria-label=" Default select example">
+                                <option selected value="0">Male</option>
+                                <option value="1">Female</option>
+                                <option value="2">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- AGE -->
+                        <p class="card-text bold-text">Age</p>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" id="patientAge" placeholder="Input Patient Age (Example: 35)" min="0">
+                        </div>
+                        <hr/>
+
+                        <!-- HYPERTENSION -->
+                        <p class="card-text bold-text">Do they have Hypertension?</p>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="patientHypertension">
+                            </div>
+                        </div>
+
+                        <!-- HEART DISEASE -->
+                        <p class="card-text bold-text">Do they have a Heart Disease?</p>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="patientHeartDisease">
+                            </div>
+                        </div>
+
+                        <!-- EVER MARRIED -->
+                        <p class="card-text bold-text">Are they Married?</p>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="patientMarry">
+                            </div>
+                        </div>
+                        <hr/>
+
+                        <!-- WORK TYPE -->
+                        <p class="card-text bold-text">Current Work Classification</p>
+                        <div class="mb-3">
+                            <select id="patientWork" class="form-select" aria-label="Default select example">
+                                <option selected value="0">Private</option>
+                                <option value="1">Self-Employed</option>
+                                <option value="2">Parent to Children</option>
+                                <option value="3">Government Job</option>
+                                <option value="4">Never Worked</option>
+                             </select>
+                        </div>
+
+                        <!-- RESIDENCE TYPE -->
+                        <p class="card-text bold-text">Residence Type</p>
+                        <div class="mb-3">
+                            <select id="patientResidence" class="form-select" aria-label="Default select example">
+                                <option selected value="0">Urban</option>
+                                <option value="1">Rural</option>
+                            </select>
+                        </div>
+
+                        <!-- GLUCOSE LEVEL -->
+                        <p class="card-text bold-text">Measured Glucose Level</p>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" id="patientGlucose" placeholder="Input Patient Glucose Level (Example: 100.00)" min="0">
+                        </div>
+
+                        <!-- BMI -->
+                        <p class="card-text bold-text">Measured BMI (Body Mass Index)</p>
+                        <div class="mb-3">
+                            <input type="number" class="form-control" id="patientBmi" placeholder="Input Patient BMI (Example: 30.00)" min="0">
+                        </div>
+
+                        <!-- SMOKING STATUS -->
+                        <p class="card-text bold-text">Smoking Status</p>
+                        <div class="mb-3">
+                            <select id="patientSmoking" class="form-select" aria-label="Default select example">
+                           <option selected value="0">Never Smoked</option>
+                           <option value="1">Unknown</option>
+                           <option value="2">Formerly Smoked</option>
+                           <option value="3">Currently Smokes</option>
+                        </select>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <hr/>
+                        <div class="text-center">
+                            <button id="patientFormSubmit" type="button" class="btn btn-danger bold-text" onclick="formCollection()">Submit Data</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- END OF FORM -->
+
+        <!-- START OF GRAPHS ROW 1 -->
+        <hr class="mb-3 mt-3">
+        <div class="row justify-content-center">
+            <h1 class="text-center mb-3 bolder-text">Stroke Data Analysis</h1>
+            <h4 class="text-center mb-2 text-muted">All Data Analysis is Based off a Publicly Sourced Dataset</h4>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- AGE GRAPH -->
+                <div class="card shadow-outline">
+                    <img class="card-img-top" src="static/images/age_graph.svg" alt="Graph showing the relationship between having a stroke and age" height="500px" width="500px">
+                    <div class="card-body">
+                        <p class="card-text">This line chart shows the number of people that have experienced a stroke in percentage concerning a person's age. In the collected data, as people age the number of people that had experienced a stroke increased. The most basic,
+                            and simplest, way to interpret this data is that as people age their chance of having had a stroke in their lifetime only increases. While there are some dips in the latter end of the chart the cause of this comes down to low
+                            sample sizes for people in that age group.
+                    </div>
+                </div>
+            </div>
+            <!-- GLUCOSE GRAPH -->
+            <div class="col-lg-6">
+                <div class="card shadow-outline">
+                    <img class="card-img-top" src="static/images/glucose_level_graph.svg" alt="Graph showing the relationship between having a stroke and blood glucose levels" height="500px" width="500px">
+                    <div class="card-body">
+                        <p class="card-text">In this double overlayed histogram the relationship between the average glucose level in a person's body and the number of people who have had a stroke in the dataset used is directly compared. Interpreting this chart involves
+                            looking at the relationship between the grey line and the red line. Near the lower end of the graph (Left Side), the red line roughly follows the grey line in elevation changes. As the average glucose level increases the red
+                            line slowly deviates from the grey line revealing a connection between high average glucose levels and the number of people who have had a stroke. A simple way to interpret this chart is to conclude that having a high average
+                            glucose level leads to a higher chance of experiencing a stroke.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF GRAPHS ROW 1 -->
+
+        <!-- START OF GRAPHS ROW 2 -->
+        <div class="mb-3"></div>
+        <div class="row">
+            <!-- AGE GRAPH -->
+            <div class="col-lg-6">
+                <div class="card shadow-outline">
+                    <img class="card-img-top" src="static/images/gender_bar.svg" alt="Graph showing the relationship between having a stroke and gender" height="500px" width="500px">
+                    <div class="card-body">
+                        <p class="card-text">This bar chart shows the relationship between the gender of someone and them having had a stroke. In the dataset used the category 'Other' is very undersampled and provides data that is hard to accurately deduce conclusions from.
+                            The 'Male' and 'Female' categories both have nearly the same ratio of people having a stroke and people not having a stroke.
+                            <br><br>If you were to only look at the 'Male' category around 95.5% of males have not experienced a stroke while 4.5% of males have experienced a stroke.
+                            <br><br>To contrast this the 'Female' category has around 95.6% of females that have not experienced a stroke while 4.4% of females have experienced a stroke. The very small discrepancy of .1% is negligible at best.
+                            <br><br>As is shown by the data, the gender of a person has little to no effect on whether or not they could experience a stroke.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- GLUCOSE GRAPH -->
+            <div class="col-lg-6">
+                <div class="card shadow-outline">
+                    <img class="card-img-top" src="static/images/smoking_bar.svg" alt="Graph showing the relationship between having a stroke and smoking status" height="500px" width="500px">
+                    <div class="card-body">
+                        <p class="card-text">This bar chart shows the relationship between a person's smoking status and them having had a stroke. Interpreting this graph without breaking down the sections individually could lead to incorrect conclusions. <br><br>In the 'Never
+                            Smoked' category around 95.4% of people have never experienced a stroke and 4.6% of people have had experienced a stroke.
+                            <br><br>In the 'Unknown' category around 97.7% of people have never experienced a stroke and 2.3% of people have had experienced a stroke.
+                            <br><br>In the 'Former Smoker' category around 93.1% of people have never experienced a stroke and 6.9% of people having had experienced a stroke.
+                            <br><br>In the 'Smoker' category around 94.7% of people have never experienced a stroke and 5.3% have had experienced a stroke.
+                            <br><br>In both categories where the people were confirmed to have smoked or are currently a smoker the ratio of people who have experienced a stroke was measurably higher than categories where either people never smoked or
+                            a person's smoking status was unknown.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END OF GRAPHS ROW 2 -->
+        <div class="mb-3"></div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="modal shadow-outline" tabindex="-1" role="dialog" id="modalCustom">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                </div>
+                <div class="modal-body">
+                    <p class="big-text bold-text" id="modalContent1"></p>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted" id="modalContent2"></p>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted" id="modalContent3"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="modalButton">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for( 'static', filename='js/app.js' ) }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
+</html>

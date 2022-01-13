@@ -1,0 +1,19 @@
+.shadow-outline {
+    box-shadow: 4px 4px 4px 4px rgb(220, 220, 220);
+}
+
+.big-text {
+    font-size: larger;
+}
+
+.bolder-text {
+    font-weight: bolder;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+body {
+    background-color: rgb(240, 240, 240) !important;
+}
